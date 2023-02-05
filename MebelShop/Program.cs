@@ -1,3 +1,6 @@
+using MebelShop.Services;
+using MebelShop.Services.Impl;
+
 namespace MebelShop
 {
     public class Program
@@ -7,6 +10,14 @@ namespace MebelShop
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            #region Services
+
+            builder.Services.AddScoped<ICatalogRepository, CatalogRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+            #endregion
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
