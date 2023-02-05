@@ -1,4 +1,5 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 using MebelShop.Model.Requests;
 using MebelShop.Services;
 using MebelShop.Services.Impl;
@@ -32,12 +33,13 @@ namespace MebelShop.Controllers
             return Ok(_productRepository.Create(new Product 
             {
                 Id = request.Id,
-                Name = request.Name,    
+                ProductName = request.ProductName,    
                 ShortDesc = request.ShortDesc,
                 LongDesc = request.LongDesc,
                 Img = request.Img,
                 Price = request.Price,
                 IsFavorite = request.IsFavorite,
+                Available = request.Available,
                 CatalogId = request.CatalogId,
                 CategoryId = request.CategoryId
             }));
