@@ -8,7 +8,7 @@ namespace MebelShop.Controllers
 {
     [Route("mebel-shop")]
     [ApiController]
-    public class CatalogConroller : ControllerBase
+    public class CatalogController : ControllerBase
     {
         #region Services
 
@@ -18,7 +18,7 @@ namespace MebelShop.Controllers
 
         #region Ctor
 
-        public CatalogConroller(ICatalogRepository catalogRepository)
+        public CatalogController(ICatalogRepository catalogRepository)
         {
             _catalogRepository = catalogRepository;
         }
