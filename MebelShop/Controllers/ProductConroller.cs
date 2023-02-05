@@ -1,12 +1,13 @@
 ﻿using MebelShop.Model;
 using MebelShop.Model.Requests;
 using MebelShop.Services;
+using MebelShop.Services.Impl;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MebelShop.Controllers
 {
-    [Route("shop/product")]
+    [Route("mebel-shop")]
     [ApiController]
     public class ProductConroller : ControllerBase
     {
@@ -25,10 +26,10 @@ namespace MebelShop.Controllers
 
         #endregion
 
-        [HttpPost("create")]
+        [HttpPost("product/create")]
         public IActionResult Create([FromBody] CreateProductRequest request) 
         {
-            return Ok(_productRepository.Create(new Model.Product 
+            return Ok(_productRepository.Create(new Product 
             {
                 Id = request.Id,
                 Name = request.Name,    
@@ -40,6 +41,32 @@ namespace MebelShop.Controllers
                 CatalogId = request.CatalogId,
                 CategoryId = request.CategoryId
             }));
+        }
+
+        [HttpDelete("product/delete")]
+        public IActionResult Delete([FromQuery] int id)
+        {
+            _productRepository.Delete(id);
+            return Ok();
+        }
+
+        [HttpGet("product/getall")]
+        public IActionResult GetAll()
+        {
+            return Ok(_productRepository.GetAll());
+        }
+
+        [HttpGet("product/get-id")]
+        public IActionResult GetById([FromQuery] int id)
+        {
+            return Ok(_productRepository.GetById(id));
+        }
+
+        [HttpPut("product/update")]
+        public IActionResult Update([FromQuery] Product item)
+        {
+            _productRepository.Update(item);
+            return Ok();
         }
     }
 }
