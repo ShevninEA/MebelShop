@@ -1,4 +1,5 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 
 namespace MebelShop.Services
 {
