@@ -18,7 +18,7 @@ namespace MebelShop.Data
         [StringLength(128)]
         public string CatalogName { get; set; }
 
-        [InverseProperty(nameof(Category.Catalog))]
-        public virtual ICollection<Category> Categorys { get; set; } = new HashSet<Category>();
+        //[InverseProperty(nameof(Category.Catalog))]
+        //public virtual ICollection<Category> Categorys { get; set; } = new HashSet<Category>();
     }
 }

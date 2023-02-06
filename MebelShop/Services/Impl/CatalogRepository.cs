@@ -1,5 +1,6 @@
 ﻿using MebelShop.Data;
 using MebelShop.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace MebelShop.Services.Impl
 {
@@ -8,29 +9,51 @@ namespace MebelShop.Services.Impl
     /// </summary>
     public class CatalogRepository : ICatalogRepository
     {
+        private readonly MebelShopDbContext _dbContext;
+
+        public CatalogRepository(MebelShopDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public int Create(Catalog data)
         {
-            throw new NotImplementedException();
+            _dbContext.Catalog.Add(data);
+            _dbContext.SaveChanges();
+            return data.Id;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            Catalog catalog = GetById(id);
+            if (catalog != null)
+            {
+                _dbContext.Catalog.Remove(catalog);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public IList<Catalog> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Catalog.ToList();
         }
 
         public Catalog GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Catalog.FirstOrDefault(et => et.Id == id);
         }
 
-        public void Update(Catalog data)
+        public bool Update(Catalog data)
         {
-            throw new NotImplementedException();
+            Catalog catalog = GetById(data.Id);
+            if (catalog != null)
+            {
+                _dbContext.Catalog.Update(catalog);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

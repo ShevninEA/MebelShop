@@ -18,12 +18,12 @@ namespace MebelShop.Data
         [StringLength(128)]
         public string CategoryName { get; set; }
 
-        [ForeignKey(nameof(Catalog))]
-        public int CatalogId { get; set; }
+        //[ForeignKey(nameof(Catalog))]
+        //public int CatalogId { get; set; }
 
-        [InverseProperty(nameof(Product.Category))]
-        public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
+        ////[InverseProperty(nameof(Product.Category))]
+        ////public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
 
-        public Catalog Catalog { get; set; }
+        //public Catalog Catalog { get; set; }
     }
 }

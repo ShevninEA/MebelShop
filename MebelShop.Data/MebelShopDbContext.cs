@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace MebelShop.Data
 {
-    /// <summary>
-    /// Отдельная сборка для работы с СУБД (для универсальности)
-    /// </summary>
     public class MebelShopDbContext : DbContext
     {
+        public DbSet<Catalog> Catalog { get; set; } // Создаем таблицу Catalog
+        public DbSet<Category> Category { get; set; } // Создаем таблицу Category
+        public DbSet<Product> Product { get; set; } // Создаем таблицу Product
+
         #region Ctor
 
         public MebelShopDbContext(DbContextOptions options) : base(options)

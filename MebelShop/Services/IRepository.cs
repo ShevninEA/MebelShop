@@ -8,7 +8,7 @@
         IList<T> GetAll(); // Получить полный список объектов
         T GetById(TId id); // Получить объект по Id
         int Create(T data); // Создать объекта
-        void Update(T data); // Изменить объект
-        void Delete(TId id); // Удалить объект
+        bool Update(T data); // Изменить объект
+        bool Delete(TId id); // Удалить объект
     }
 }
