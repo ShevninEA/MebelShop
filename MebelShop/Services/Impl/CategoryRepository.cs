@@ -4,7 +4,7 @@ using MebelShop.Model;
 namespace MebelShop.Services.Impl
 {
     /// <summary>
-    /// Репозиторий каталога
+    /// Репозиторий категории
     /// </summary>
     public class CategoryRepository : ICategoryRepository
     {

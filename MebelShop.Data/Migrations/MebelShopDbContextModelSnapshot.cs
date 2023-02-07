@@ -47,12 +47,17 @@ namespace MebelShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CatalogId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CatalogId");
 
                     b.ToTable("Category");
                 });
@@ -67,9 +72,6 @@ namespace MebelShop.Data.Migrations
 
                     b.Property<bool>("Available")
                         .HasColumnType("bit");
-
-                    b.Property<int>("CatalogId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -102,30 +104,41 @@ namespace MebelShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CatalogId");
-
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("MebelShop.Data.Product", b =>
+            modelBuilder.Entity("MebelShop.Data.Category", b =>
                 {
                     b.HasOne("MebelShop.Data.Catalog", "Catalog")
-                        .WithMany()
+                        .WithMany("Categorys")
                         .HasForeignKey("CatalogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Catalog");
+                });
+
+            modelBuilder.Entity("MebelShop.Data.Product", b =>
+                {
                     b.HasOne("MebelShop.Data.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Catalog");
-
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MebelShop.Data.Catalog", b =>
+                {
+                    b.Navigation("Categorys");
+                });
+
+            modelBuilder.Entity("MebelShop.Data.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

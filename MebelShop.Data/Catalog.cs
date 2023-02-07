@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,7 +16,7 @@ namespace MebelShop.Data
         [StringLength(128)]
         public string CatalogName { get; set; }
 
-        //[InverseProperty(nameof(Category.Catalog))]
-        //public virtual ICollection<Category> Categorys { get; set; } = new HashSet<Category>();
+        [InverseProperty(nameof(Category.Catalog))]
+        public virtual ICollection<Category> Categorys { get; set; } = new HashSet<Category>();
     }
 }

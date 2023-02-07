@@ -34,7 +34,7 @@ namespace MebelShop.Controllers
             {
                 Id = request.Id,
                 CategoryName = request.CategoryName,
-                //CatalogId = request.CatalogId
+                CatalogId = request.CatalogId
             }));
         }
 

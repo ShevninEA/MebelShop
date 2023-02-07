@@ -13,7 +13,6 @@
         public decimal Price { set; get; } // Цена товара
         public bool IsFavorite { set; get; } // Товар на главной странице сайта
         public bool Available { set; get; } // Наличие товара
-        public int CatalogId { get; set; } // Id основного каталога
         public int CategoryId { get; set; } // Id категории каталога
     }
 }

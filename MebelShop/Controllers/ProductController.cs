@@ -28,19 +28,18 @@ namespace MebelShop.Controllers
         #endregion
 
         [HttpPost("product/create")]
-        public IActionResult Create([FromBody] CreateProductRequest request) 
+        public IActionResult Create([FromQuery] CreateProductRequest request)
         {
-            return Ok(_productRepository.Create(new Product 
+            return Ok(_productRepository.Create(new Product
             {
                 Id = request.Id,
-                ProductName = request.ProductName,    
+                ProductName = request.ProductName,
                 ShortDesc = request.ShortDesc,
                 LongDesc = request.LongDesc,
                 Img = request.Img,
                 Price = request.Price,
                 IsFavorite = request.IsFavorite,
                 Available = request.Available,
-                CatalogId = request.CatalogId,
                 CategoryId = request.CategoryId
             }));
         }

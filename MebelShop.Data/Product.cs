@@ -14,6 +14,9 @@ namespace MebelShop.Data
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [ForeignKey(nameof(Category))]
+        public int CategoryId { get; set; }
+
         [Column]
         [StringLength(128)]
         public string ProductName { get; set; }
@@ -39,14 +42,6 @@ namespace MebelShop.Data
         [Column]
         public bool Available { get; set; }
 
-        [ForeignKey(nameof(Catalog))]
-        public int CatalogId { get; set; }
-
-        [ForeignKey(nameof(Category))]
-        public int CategoryId { get; set; }
-
         public Category Category { get; set; }
-
-        public Catalog Catalog { get; set; }
     }
 }

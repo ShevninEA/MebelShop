@@ -5,7 +5,7 @@
 namespace MebelShop.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitalCreate : Migration
+    public partial class InitCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,11 +29,18 @@ namespace MebelShop.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    CatalogId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Category_Catalog_CatalogId",
+                        column: x => x.CatalogId,
+                        principalTable: "Catalog",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,18 +56,11 @@ namespace MebelShop.Data.Migrations
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     IsFavorite = table.Column<bool>(type: "bit", nullable: false),
                     Available = table.Column<bool>(type: "bit", nullable: false),
-                    CatalogId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Product_Catalog_CatalogId",
-                        column: x => x.CatalogId,
-                        principalTable: "Catalog",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
@@ -70,8 +70,8 @@ namespace MebelShop.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CatalogId",
-                table: "Product",
+                name: "IX_Category_CatalogId",
+                table: "Category",
                 column: "CatalogId");
 
             migrationBuilder.CreateIndex(
@@ -87,10 +87,10 @@ namespace MebelShop.Data.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Catalog");
+                name: "Category");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Catalog");
         }
     }
 }

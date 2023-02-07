@@ -49,7 +49,6 @@ namespace MebelShop
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
