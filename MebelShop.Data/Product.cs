@@ -12,7 +12,6 @@ namespace MebelShop.Data
     [Table("Product")]
     public class Product
     {
-
         [BindNever]
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
