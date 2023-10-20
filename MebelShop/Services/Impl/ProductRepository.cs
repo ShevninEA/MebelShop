@@ -1,4 +1,5 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 
 namespace MebelShop.Services.Impl
 {
@@ -7,29 +8,51 @@ namespace MebelShop.Services.Impl
     /// </summary>
     public class ProductRepository : IProductRepository
     {
+        private readonly MebelShopDbContext _dbContext;
+
+        public ProductRepository(MebelShopDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public int Create(Product data)
         {
-            throw new NotImplementedException();
+            _dbContext.Product.Add(data);
+            _dbContext.SaveChanges();
+            return data.Id;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            Product product = GetById(id);
+            if (product != null)
+            {
+                _dbContext.Product.Remove(product);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public IList<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Product.ToList();
         }
 
         public Product GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Product.FirstOrDefault(et => et.Id == id);
         }
 
-        public void Update(Product data)
+        public bool Update(Product data)
         {
-            throw new NotImplementedException();
+            Product product = GetById(data.Id);
+            if (product != null)
+            {
+                _dbContext.Product.Update(product);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

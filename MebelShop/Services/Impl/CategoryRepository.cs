@@ -1,35 +1,58 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 
 namespace MebelShop.Services.Impl
 {
     /// <summary>
-    /// Репозиторий каталога
+    /// Репозиторий категории
     /// </summary>
     public class CategoryRepository : ICategoryRepository
     {
+        private readonly MebelShopDbContext _dbContext;
+
+        public CategoryRepository(MebelShopDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public int Create(Category data)
         {
-            throw new NotImplementedException();
+            _dbContext.Category.Add(data);
+            _dbContext.SaveChanges();
+            return data.Id;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            Category category = GetById(id);
+            if (category != null)
+            {
+                _dbContext.Category.Remove(category);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public IList<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Category.ToList();
         }
 
         public Category GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Category.FirstOrDefault(et => et.Id == id);
         }
 
-        public void Update(Category data)
+        public bool Update(Category data)
         {
-            throw new NotImplementedException();
+            Category category = GetById(data.Id);
+            if (category != null)
+            {
+                _dbContext.Category.Update(category);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

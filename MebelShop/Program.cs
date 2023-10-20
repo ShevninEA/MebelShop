@@ -1,5 +1,7 @@
+using MebelShop.Data;
 using MebelShop.Services;
 using MebelShop.Services.Impl;
+using Microsoft.EntityFrameworkCore;
 
 namespace MebelShop
 {
@@ -11,13 +13,25 @@ namespace MebelShop
 
             // Add services to the container.
 
-            #region Services
+            #region Configure Repositories
 
+            // Регистрация репозиториев
             builder.Services.AddScoped<ICatalogRepository, CatalogRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
             #endregion
+
+            #region Configure EF DBContext Service
+
+            // Регистрация взимодействия с базой данных
+            builder.Services.AddDbContext<MebelShopDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration["Settings:DatabaseOptions:ConnectionString"]);
+            });
+
+            #endregion
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,7 +48,6 @@ namespace MebelShop
             }
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

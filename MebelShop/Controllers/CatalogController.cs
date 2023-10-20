@@ -1,4 +1,5 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 using MebelShop.Model.Requests;
 using MebelShop.Services;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +9,7 @@ namespace MebelShop.Controllers
 {
     [Route("mebel-shop")]
     [ApiController]
-    public class CatalogConroller : ControllerBase
+    public class CatalogController : ControllerBase
     {
         #region Services
 
@@ -18,7 +19,7 @@ namespace MebelShop.Controllers
 
         #region Ctor
 
-        public CatalogConroller(ICatalogRepository catalogRepository)
+        public CatalogController(ICatalogRepository catalogRepository)
         {
             _catalogRepository = catalogRepository;
         }

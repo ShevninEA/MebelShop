@@ -1,4 +1,5 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 using MebelShop.Model.Requests;
 using MebelShop.Services;
 using MebelShop.Services.Impl;

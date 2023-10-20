@@ -1,4 +1,5 @@
-﻿using MebelShop.Model;
+﻿using MebelShop.Data;
+using MebelShop.Model;
 using MebelShop.Model.Requests;
 using MebelShop.Services;
 using MebelShop.Services.Impl;
@@ -9,7 +10,7 @@ namespace MebelShop.Controllers
 {
     [Route("mebel-shop")]
     [ApiController]
-    public class ProductConroller : ControllerBase
+    public class ProductController : ControllerBase
     {
         #region Services
 
@@ -19,7 +20,7 @@ namespace MebelShop.Controllers
 
         #region Ctor
 
-        public ProductConroller(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
@@ -27,18 +28,18 @@ namespace MebelShop.Controllers
         #endregion
 
         [HttpPost("product/create")]
-        public IActionResult Create([FromBody] CreateProductRequest request) 
+        public IActionResult Create([FromQuery] CreateProductRequest request)
         {
-            return Ok(_productRepository.Create(new Product 
+            return Ok(_productRepository.Create(new Product
             {
                 Id = request.Id,
-                Name = request.Name,    
+                ProductName = request.ProductName,
                 ShortDesc = request.ShortDesc,
                 LongDesc = request.LongDesc,
                 Img = request.Img,
                 Price = request.Price,
                 IsFavorite = request.IsFavorite,
-                CatalogId = request.CatalogId,
+                Available = request.Available,
                 CategoryId = request.CategoryId
             }));
         }
